@@ -206,23 +206,44 @@ button {
 
 @media (max-width: 640px) {
   .target-nav-container {
-    padding-left: 16px;
-    padding-right: 16px;
+    padding-left: 14px;
+    padding-right: 14px;
   }
   .target-nav-wordmark {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
+    letter-spacing: 0.06em;
   }
   .target-nav-pill {
-    gap: 14px;
-    padding: 6px 16px;
+    gap: 12px;
+    padding: 6px 14px;
   }
   .target-pill-link {
-    font-size: 0.8rem;
-    min-height: 44px;
+    font-size: 0.78rem;
+    min-height: 40px;
   }
   .target-nav-connect {
-    font-size: 0.88rem;
-    min-height: 44px;
+    font-size: 0.84rem;
+    min-height: 40px;
+  }
+}
+
+@media (max-width: 400px) {
+  .target-nav-container {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .target-nav-wordmark {
+    font-size: 0.82rem;
+  }
+  .target-nav-pill {
+    gap: 10px;
+    padding: 5px 12px;
+  }
+  .target-pill-link {
+    font-size: 0.74rem;
+  }
+  .target-nav-connect {
+    font-size: 0.8rem;
   }
 }
 
@@ -252,20 +273,7 @@ button {
   box-sizing: border-box;
 }
 
-@media (max-width: 768px) {
-  .ref-hero {
-    padding: calc(var(--nav-height) + 16px) clamp(20px, 5vw, 24px) 36px;
-    background-image: 
-      linear-gradient(to bottom, transparent 55%, var(--black) 98%),
-      linear-gradient(
-        to bottom,
-        var(--burgundy) 0%,
-        var(--burgundy-deep) 40%,
-        var(--black) 80%,
-        var(--black) 100%
-      );
-  }
-}
+
 
 /* Portrait Cutout Wrapper */
 .ref-hero-portrait-wrap {
@@ -311,28 +319,7 @@ button {
   }
 }
 
-@media (max-width: 768px) {
-  .ref-hero-portrait-wrap {
-    mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
-    -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
-  }
-  .ref-hero-portrait-img {
-    position: absolute;
-    right: 50%;
-    transform: translateX(50%);
-    top: auto;
-    bottom: -20px;
-    width: auto;
-    height: 58svh;
-    max-width: 360px;
-    object-fit: cover;
-    object-position: center top;
-    opacity: 0.38;
-    filter: brightness(0.85) contrast(1.05);
-    mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
-    -webkit-mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
-  }
-}
+
 
 /* Content Container */
 .ref-hero-inner {
@@ -358,13 +345,7 @@ button {
   max-width: 760px;
 }
 
-@media (max-width: 768px) {
-  .ref-hero-headline-block {
-    margin-top: 10px;
-    margin-bottom: 0;
-    padding-top: 10px;
-  }
-}
+
 
 .ref-hero-kicker {
   font-family: var(--font-mono);
@@ -562,28 +543,168 @@ button {
 }
 
 @media (max-width: 768px) {
+  .ref-hero {
+    min-height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: calc(var(--nav-height) + 16px) clamp(20px, 5vw, 24px) 56px;
+    background-image: 
+      linear-gradient(to bottom, transparent 65%, var(--black) 100%),
+      linear-gradient(
+        to bottom,
+        var(--burgundy) 0%,
+        var(--burgundy-deep) 35%,
+        var(--black) 70%,
+        var(--black) 100%
+      );
+  }
+
+  .custom-cursor-root {
+    display: none !important;
+  }
+
+  /* Flatten content container so flex ordering can place portrait cleanly between headline and copy */
+  .ref-hero-inner {
+    display: contents;
+  }
+
+  /* 1. Headline Block at top */
+  .ref-hero-headline-block {
+    order: 1;
+    margin: 0;
+    padding: 12px 0 0 0;
+    max-width: 100%;
+  }
+
+  /* Generous vertical spacing after availability badge so portrait sits distinctly lower */
+  .ref-hero-availability {
+    margin-top: 16px;
+    margin-bottom: clamp(28px, 5vh, 40px);
+  }
+
+  /* 2. Portrait Cutout seamlessly integrated with ambient illumination & soft fades */
+  .ref-hero-portrait-wrap {
+    order: 2;
+    position: relative;
+    inset: auto;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    margin: 4px 0 clamp(24px, 4.5vh, 36px) 0;
+    overflow: visible;
+    pointer-events: auto;
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+
+  /* Soft ambient burgundy illumination behind portrait */
+  .ref-hero-portrait-wrap::before {
+    content: '';
+    position: absolute;
+    top: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 320px;
+    height: 90%;
+    background: radial-gradient(
+      ellipse at 50% 45%,
+      rgba(90, 18, 35, 0.42) 0%,
+      rgba(42, 7, 16, 0.25) 48%,
+      transparent 72%
+    );
+    filter: blur(24px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Subtle bottom vignette to ensure seamless transition to black background */
+  .ref-hero-portrait-wrap::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -2px;
+    height: 28%;
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgba(11, 7, 8, 0.5) 60%,
+      var(--black) 100%
+    );
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .ref-hero-portrait-img {
+    position: relative;
+    right: auto;
+    left: auto;
+    top: auto;
+    bottom: auto;
+    transform: none;
+    width: 100%;
+    max-width: min(84vw, 300px);
+    height: auto;
+    max-height: 46svh;
+    object-fit: contain;
+    object-position: center bottom;
+    opacity: 0.98;
+    filter: 
+      brightness(0.97)
+      contrast(1.02)
+      drop-shadow(0 10px 24px rgba(11, 7, 8, 0.8))
+      drop-shadow(0 2px 8px rgba(74, 14, 27, 0.3));
+    mask-image: linear-gradient(to bottom, black 0%, black 72%, rgba(0, 0, 0, 0.85) 86%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 0%, black 72%, rgba(0, 0, 0, 0.85) 86%, transparent 100%);
+    display: block;
+    margin: 0 auto;
+    z-index: 1;
+  }
+
+  /* 3. Bio Description and CTA Buttons cleanly positioned below portrait */
   .ref-hero-bottom-row {
+    order: 3;
+    position: relative;
+    width: 100%;
+    margin-top: 0;
+    padding: 0;
+    display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 16px;
+    gap: 18px;
     background: transparent;
     border: none;
-    padding: 20px 0 12px;
-    margin-top: 16px;
-    width: 100%;
-    z-index: 3;
-    position: relative;
+    z-index: 2;
   }
+
   .ref-hero-bottom-left {
     max-width: 100%;
-    background-color: rgba(11, 7, 8, 0.75);
-    padding: 12px 14px;
-    border-left: 2px solid var(--burgundy);
+    background-color: transparent;
+    padding: 0;
+    border-left: none;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
   }
+
   .ref-hero-bio {
-    font-size: 14px;
+    font-size: 15.5px;
+    line-height: 1.6;
+    color: rgba(239, 230, 214, 0.88);
     max-width: 100%;
   }
+
+  .ref-hero-cta-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 14px;
+    margin-top: 2px;
+  }
+
   .ref-hero-bottom-right {
     display: none;
   }
