@@ -27,8 +27,21 @@ export const Certifications = () => {
               <div key={idx} className="certification-row" role="listitem">
                 <div className="certification-meta">
                   <span className="certification-idx">0{idx + 1} —</span>
-                  <h3 className="certification-title">{cert}</h3>
+                  <h3 className="certification-title">{cert.title}</h3>
                 </div>
+
+                {cert.credentialUrl && (
+                  <a
+                    href={cert.credentialUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="certification-credential-link"
+                    aria-label={`Credential link for ${cert.title}`}
+                  >
+                    <span>Credential link</span>
+                    <span className="certification-credential-link-arrow" aria-hidden="true">↗</span>
+                  </a>
+                )}
               </div>
             ))}
           </div>

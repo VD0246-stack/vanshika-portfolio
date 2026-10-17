@@ -37,6 +37,11 @@ export interface LeadershipEntry {
   role: string;
 }
 
+export interface CertificationItem {
+  title: string;
+  credentialUrl: string;
+}
+
 export interface ApproachStage {
   number: string;
   title: string;
@@ -78,7 +83,7 @@ export interface PortfolioData {
     cgpa: string;
     sgpa: string;
   };
-  certifications: string[];
+  certifications: CertificationItem[];
   leadership: LeadershipEntry[];
   experience: ExperienceItem[];
   contact: {
@@ -311,9 +316,21 @@ export const portfolioData: PortfolioData = {
   },
 
   certifications: [
-    'Google Project Management Certificate',
-    'Meta Full-Stack Developer Certificate',
-    'Data Structures and Algorithms Course — Udemy',
+    {
+      title: 'Google Project Management Certificate',
+      credentialUrl:
+        'https://www.coursera.org/account/accomplishments/specialization/NWCZV0RBE22D',
+    },
+    {
+      title: 'Meta Full-Stack Developer Certificate',
+      credentialUrl:
+        'https://www.coursera.org/account/accomplishments/specialization/PU9ZNQS80D5L',
+    },
+    {
+      title: 'Data Structures and Algorithms Course — Udemy',
+      credentialUrl:
+        'https://www.udemy.com/certificate/UC-155fb221-d9b8-47ef-ad55-a74ba8aeb001/',
+    },
   ],
 
   leadership: [
