@@ -23,18 +23,18 @@ export const About = () => {
       <div className="editorial-grid-layout">
         {/* Left Columns 1-3: Small Mono Label */}
         <div className="section-label-col">
-          <span className="section-mono-label">About</span>
+          <span className="section-mono-label" data-reveal>About</span>
         </div>
 
         {/* Right Columns 4-12: Content */}
         <div className="section-content-col">
           {/* Main Heading in Instrument Serif */}
-          <h2 className="about-editorial-heading">
+          <h2 className="about-editorial-heading" data-reveal>
             {personal.aboutHeading}
           </h2>
 
           {/* Narrative Body Copy with Deliberate Editorial Rhythm */}
-          <div className="about-editorial-prose">
+          <div className="about-editorial-prose" data-reveal>
             <p className="about-prose-lead">
               {personal.aboutParagraphs[0]}
             </p>
@@ -51,7 +51,7 @@ export const About = () => {
           {/* Focus Pillars: Clean Editorial Grid */}
           <div className="about-focus-pillars" role="list" aria-label="Core focus areas">
             {focusPillars.map((pillar) => (
-              <div key={pillar.label} className="about-pillar-item" role="listitem">
+              <div key={pillar.label} className="about-pillar-item" role="listitem" data-reveal>
                 <span className="about-pillar-bullet" aria-hidden="true">—</span>
                 <div className="about-pillar-content">
                   <h3 className="about-pillar-title">{pillar.label}</h3>

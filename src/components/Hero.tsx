@@ -1,7 +1,59 @@
-import { type MouseEvent } from 'react';
+import { useEffect, useRef, type MouseEvent } from 'react';
 import { portfolioData } from '../data/portfolioData';
 
 export const Hero = () => {
+  const heroRef = useRef<HTMLElement | null>(null);
+  const targetPos = useRef({ x: 0, y: 0 });
+  const currentPos = useRef({ x: 0, y: 0 });
+  const rafId = useRef<number | null>(null);
+
+  useEffect(() => {
+    // Only enable 3D pointer parallax on fine pointer desktop devices
+    const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    const isDesktop = window.innerWidth > 1024;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (!finePointer || !isDesktop || prefersReducedMotion) return;
+
+    const heroEl = heroRef.current;
+    if (!heroEl) return;
+
+    const handleMouseMove = (e: globalThis.MouseEvent) => {
+      const rect = heroEl.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width;
+      const y = (e.clientY - rect.top) / rect.height;
+      targetPos.current = {
+        x: Math.max(-1, Math.min(1, (x - 0.5) * 2)),
+        y: Math.max(-1, Math.min(1, (y - 0.5) * 2)),
+      };
+    };
+
+    const handleMouseLeave = () => {
+      targetPos.current = { x: 0, y: 0 };
+    };
+
+    const updateParallax = () => {
+      const ease = 0.08;
+      currentPos.current.x += (targetPos.current.x - currentPos.current.x) * ease;
+      currentPos.current.y += (targetPos.current.y - currentPos.current.y) * ease;
+
+      heroEl.style.setProperty('--hero-mouse-x', currentPos.current.x.toFixed(4));
+      heroEl.style.setProperty('--hero-mouse-y', currentPos.current.y.toFixed(4));
+
+      rafId.current = requestAnimationFrame(updateParallax);
+    };
+
+    heroEl.addEventListener('mousemove', handleMouseMove, { passive: true });
+    heroEl.addEventListener('mouseleave', handleMouseLeave);
+    rafId.current = requestAnimationFrame(updateParallax);
+
+    return () => {
+      heroEl.removeEventListener('mousemove', handleMouseMove);
+      heroEl.removeEventListener('mouseleave', handleMouseLeave);
+      if (rafId.current) cancelAnimationFrame(rafId.current);
+    };
+  }, []);
+
   const scrollToSection = (e: MouseEvent<HTMLAnchorElement>, targetId: string) => {
     e.preventDefault();
     const el = document.getElementById(targetId);
@@ -15,7 +67,7 @@ export const Hero = () => {
   const { personal } = portfolioData;
 
   return (
-    <section id="hero" className="ref-hero">
+    <section id="hero" ref={heroRef} className="ref-hero">
       {/* Large Transparent Portrait Cutout Bleeding Off Bottom Edge */}
       <div className="ref-hero-portrait-wrap">
         <img
@@ -37,8 +89,12 @@ export const Hero = () => {
           </div>
 
           <h1 className="ref-hero-h1">
-            <span className="ref-hero-line1">{personal.headline.line1}</span>
-            <span className="ref-hero-line2">{personal.headline.line2}</span>
+            <span className="hero-mask-wrapper">
+              <span className="hero-reveal-text ref-hero-line1">{personal.headline.line1}</span>
+            </span>
+            <span className="hero-mask-wrapper">
+              <span className="hero-reveal-text ref-hero-line2">{personal.headline.line2}</span>
+            </span>
           </h1>
 
           {/* Academic Identification */}

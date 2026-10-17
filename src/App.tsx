@@ -8,8 +8,11 @@ import { TechnicalSkills } from './components/TechnicalSkills';
 import { Certifications } from './components/Certifications';
 import { Leadership } from './components/Leadership';
 import { ContactSection } from './components/ContactSection';
+import { useScrollReveal } from './hooks/useScrollReveal';
 
 function App() {
+  useScrollReveal();
+
   return (
     <div className="editorial-site-wrapper">
       {/* Contextual Custom Cursor for Desktop Fine Pointers */}

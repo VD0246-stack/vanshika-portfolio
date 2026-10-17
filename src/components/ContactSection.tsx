@@ -7,7 +7,7 @@ export const ContactSection = () => {
     <section id="contact" className="editorial-section section-contact-dark">
       <div className="editorial-grid-layout">
         {/* Left Columns 1-3: Small Mono Label */}
-        <div className="section-label-col">
+        <div className="section-label-col" data-reveal>
           <span className="section-mono-label contact-dark-label">
             {contact.label}
           </span>
@@ -15,8 +15,10 @@ export const ContactSection = () => {
 
         {/* Right Columns 4-12: Content in Black-and-Burgundy Theme */}
         <div className="section-content-col">
-          <h2 className="contact-editorial-heading">{contact.heading}</h2>
-          <p className="contact-editorial-lead">{contact.description}</p>
+          <div data-reveal>
+            <h2 className="contact-editorial-heading">{contact.heading}</h2>
+            <p className="contact-editorial-lead">{contact.description}</p>
+          </div>
 
           {/* Prominent Professional External Profiles & Direct Email */}
           <div className="contact-profiles-grid" role="list" aria-label="Professional contact channels">
@@ -28,6 +30,7 @@ export const ContactSection = () => {
                 rel={item.url.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
                 className="contact-profile-card"
                 role="listitem"
+                data-reveal
               >
                 <div className="profile-card-top">
                   <span className="profile-card-name">{item.name}</span>
@@ -44,7 +47,7 @@ export const ContactSection = () => {
           </div>
 
           {/* Direct Collaboration Note & Email Access */}
-          <div className="contact-direct-panel">
+          <div className="contact-direct-panel" data-reveal>
             <div className="direct-panel-content">
               <h3 className="direct-panel-title">Internship Inquiries & Collaborations</h3>
               <p className="direct-panel-desc">
@@ -78,11 +81,11 @@ export const ContactSection = () => {
           </div>
 
           {/* Closing Line & Colophon */}
-          <div className="contact-closing-wrap">
+          <div className="contact-closing-wrap" data-reveal>
             <p className="contact-closing-line">{contact.closingLine}</p>
           </div>
 
-          <div className="contact-editorial-colophon">
+          <div className="contact-editorial-colophon" data-reveal>
             <span>© 2026 Vanshika Dhaka</span>
             <span className="colophon-dept">
               Computer Science & Engineering · AI/ML
