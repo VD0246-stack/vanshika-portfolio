@@ -71,7 +71,7 @@ export const Hero = () => {
       {/* Large Transparent Portrait Cutout Bleeding Off Bottom Edge */}
       <div className="ref-hero-portrait-wrap">
         <img
-          src="/images/portrait-cutout.webp"
+          src={`${import.meta.env.BASE_URL}images/portrait-cutout.webp`}
           alt="Portrait of Vanshika Dhaka, Computer Science & Engineering student"
           width="540"
           height="960"

@@ -16,7 +16,7 @@ export const Portrait = ({ className = '' }: PortraitProps) => {
       {/* Main Portrait Frame */}
       <div className="portrait-image-wrapper">
         <img
-          src="/images/vanshika.jpg"
+          src={`${import.meta.env.BASE_URL}images/vanshika.jpg`}
           alt="Portrait of Vanshika in a burgundy sweater, Computer Science and Engineering student"
           className={`portrait-image ${isLoaded ? 'loaded' : ''}`}
           onLoad={() => setIsLoaded(true)}
