@@ -1,0 +1,35 @@
+/* ==========================================================================
+   GLOBAL DESIGN TOKENS
+   Strict Editorial Palette & Typographic System
+   ========================================================================== */
+
+:root {
+  /* Core Color Tokens */
+  --black: #0b0708;
+  --burgundy: #4a0e1b;
+  --burgundy-deep: #2a0710;
+  --ivory: #efe6d6;
+  --rose: #e4aab6;
+  --rose-dim: #ba8692;
+
+  /* Nav Pill Tokens */
+  --pill-bg: #140709;
+  --pill-border: rgba(239, 230, 214, 0.15);
+  --pill-hover: #1e0b0e;
+
+  /* Typography */
+  --font-display: 'Instrument Serif', Georgia, serif;
+  --font-body: 'Instrument Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+
+  /* Strict Geometry Rule: border-radius: 0 everywhere (only exception: nav pill) */
+  --radius-none: 0px;
+  --radius-pill: 999px;
+
+  /* Strict Hover Transitions: 150ms color / underline only */
+  --transition-fast: 150ms ease;
+
+  /* Layout */
+  --max-width: 1440px;
+  --nav-height: 72px;
+}
